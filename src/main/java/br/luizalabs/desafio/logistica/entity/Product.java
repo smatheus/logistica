@@ -15,7 +15,7 @@ import java.util.Set;
 public class Product {
     @Id
     private Long id;
-    private BigDecimal value;
+    private BigDecimal price;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<ProductOrder> orderedProducts = new HashSet<>();

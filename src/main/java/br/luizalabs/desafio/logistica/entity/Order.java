@@ -12,7 +12,7 @@ import java.util.Set;
 @Data
 public class Order {
     @Id
-    private Long orderId;
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
@@ -21,10 +21,14 @@ public class Order {
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<ProductOrder> orderedProducts = new HashSet<>();
 
-    private BigDecimal orderValue;
+    private BigDecimal totalAmount = BigDecimal.ZERO;
 
     private LocalDate orderDate;
     public void setOrderedProducts(ProductOrder orderedProduct) {
         this.orderedProducts.add(orderedProduct);
+    }
+
+    public void setTotalAmount(BigDecimal amount){
+        this.totalAmount = this.totalAmount.add(amount);
     }
 }
