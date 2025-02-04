@@ -25,5 +25,4 @@ public class OrderService {
     public void saveAllOrders(List<Order> orders){
         if (!orders.isEmpty()) orderRepository.saveAll(orders);
     }
-
 }
