@@ -20,3 +20,5 @@
  > Devido ao escopo reduzido do projeto foi optado por utilizar uma arquitetura baseada em camadas para simplificar, porém ainda foram seguidos diversos padrões para garantir a manutenabilidade e evolução do código como por exemplo o SOLID.
  
  > Foi utilizado o flyway para executar as migrations de banco de dados e criar as tabelas devido a sua versatilidade de trabalhar com SQL.
+
+ > Foi Criado um pipeline para o github actions para rodar o build, tests e gerar um coverage.
