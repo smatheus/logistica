@@ -37,7 +37,7 @@ public class OrderControllerIntegrationTest {
         mockMvc.perform(multipart("/order")
                         .file(file)
                         .contentType(MediaType.MULTIPART_FORM_DATA))
-                .andExpect(status().isCreated()).andExpect(content().string("File process successful"));
+                .andExpect(status().isCreated()).andExpect(content().string("File processed successfully"));
     }
 
 
