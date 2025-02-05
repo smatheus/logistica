@@ -31,9 +31,6 @@ public class Product {
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @ToString.Exclude
     private Set<ProductOrder> orderedProducts = new HashSet<>();
-    public void setOrderedProducts(ProductOrder orderedProduct) {
-        this.orderedProducts.add(orderedProduct);
-    }
 
     @Override
     public final boolean equals(Object o) {

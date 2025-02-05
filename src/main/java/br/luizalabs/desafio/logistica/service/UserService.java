@@ -39,17 +39,20 @@ public class UserService {
         if (!users.isEmpty()) userRepository.saveAll(users);
     }
 
-    public Page<UsersOrdersDTO> findUsersOrders(Long orderId, LocalDate startDate, LocalDate endDate, Pageable pageable) {
+    public Page<UsersOrdersDTO> findUsersOrders(Long orderId, LocalDate startDate, LocalDate endDate, Pageable pageable) throws RuntimeException {
+        try {
+            Page<User> users = userRepository.findUsersWithOrder(orderId, startDate, endDate, pageable);
+            UserOrdersDTOFactory factory = new UserOrdersDTOFactory(orderRepository, productOrderRepository, orderId);
 
-        Page<User> users = userRepository.findUsersWithOrder(orderId, startDate, endDate, pageable);
-        UserOrdersDTOFactory factory = new UserOrdersDTOFactory(orderRepository, productOrderRepository, orderId);
-
-        List<UsersOrdersDTO> usersOrdersDTO = users.stream()
-                .map(factory::createUserOrdersDTO)
-                .collect(Collectors.toList());
+            List<UsersOrdersDTO> usersOrdersDTO = users.stream()
+                    .map(factory::createUserOrdersDTO)
+                    .collect(Collectors.toList());
 
 
-        return new PageImpl<>(usersOrdersDTO, pageable, users.getTotalElements());
+            return new PageImpl<>(usersOrdersDTO, pageable, users.getTotalElements());
+        }catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
     }
 }

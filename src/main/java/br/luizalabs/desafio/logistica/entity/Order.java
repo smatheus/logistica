@@ -47,9 +47,6 @@ public class Order {
 
     @Temporal(TemporalType.DATE)
     private LocalDate orderDate;
-    public void setOrderedProducts(ProductOrder orderedProduct) {
-        this.orderedProducts.add(orderedProduct);
-    }
 
     public void setTotalAmount(BigDecimal amount){
         this.totalAmount = this.totalAmount.add(amount);

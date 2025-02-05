@@ -2,6 +2,8 @@ package br.luizalabs.desafio.logistica.controller;
 
 import br.luizalabs.desafio.logistica.dto.UsersOrdersDTO;
 import br.luizalabs.desafio.logistica.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,6 +21,8 @@ import java.time.LocalDate;
 @RequestMapping("/user")
 public class UserController {
 
+    private final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
+
     @Autowired
     private UserService userService;
 
@@ -30,8 +34,9 @@ public class UserController {
         try {
             Page<UsersOrdersDTO> usersOrdersDTOS = userService.findUsersOrders(orderId, startDate, endDate, pageable);
             return ResponseEntity.ok(usersOrdersDTOS);
-        } catch (Exception e){
-            throw new RuntimeException(e);
+        } catch (RuntimeException e){
+            LOGGER.error(e.getMessage(), e);
+            throw e;
         }
 
     }

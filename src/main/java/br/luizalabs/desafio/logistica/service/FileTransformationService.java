@@ -4,6 +4,7 @@ import br.luizalabs.desafio.logistica.entity.Order;
 import br.luizalabs.desafio.logistica.entity.Product;
 import br.luizalabs.desafio.logistica.entity.ProductOrder;
 import br.luizalabs.desafio.logistica.entity.User;
+import br.luizalabs.desafio.logistica.exception.FileIsEmptyException;
 import br.luizalabs.desafio.logistica.processor.FileProcessor;
 import br.luizalabs.desafio.logistica.processor.OrderFileProcessor;
 import br.luizalabs.desafio.logistica.repository.ProductOrderRepository;
@@ -38,7 +39,8 @@ public class FileTransformationService {
     private ProductOrderService productOrderService;
 
     @Transactional
-    public void insertOrders(File file) throws IOException {
+    public void insertOrders(File file) throws IOException, FileIsEmptyException {
+        validateFileSize(file);
         Map<Long, User> userMap = userService.loadExistingUsers();
         Map<Long, Order> orderMap = orderService.loadExistingOrders();
         Map<Long, Product> productMap = productService.loadExistingProducts();
@@ -49,12 +51,17 @@ public class FileTransformationService {
         List<ProductOrder> productOrders = new ArrayList<>();
 
         FileProcessor orderFileProcessor = new OrderFileProcessor(userMap, orderMap, productMap, newUsers, newOrders, newProducts, productOrders);
-
         try (Stream<String> lines = Files.lines(file.toPath())) {
             lines.forEach(orderFileProcessor::processLine);
         }
 
         saveEntities(newUsers, newOrders, newProducts, productOrders);
+    }
+
+    private void validateFileSize(File file) throws IOException, FileIsEmptyException {
+        if(Files.size(file.toPath()) == 0){
+            throw new FileIsEmptyException("File is empty");
+        }
     }
 
     private void saveEntities(List<User> users, List<Order> orders, List<Product> products, List<ProductOrder> productsOrders) {
