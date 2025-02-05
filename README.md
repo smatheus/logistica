@@ -21,4 +21,4 @@
  
  > Foi utilizado o flyway para executar as migrations de banco de dados e criar as tabelas devido a sua versatilidade de trabalhar com SQL.
 
- > Foi Criado um pipeline para o github actions para rodar o build, tests e gerar um coverage.
+ > Foi Criado um pipeline para o github actions para rodar o build, tests e gerar um coverage. O Coverage é gerado no codecov para poder consultar visualmente a cobertura de testes da aplicação.
