@@ -8,8 +8,8 @@ import java.util.List;
 
 public interface OrderRepository extends JpaRepository<Order, Long>{
 
-    @Query("SELECT order FROM Order order INNER JOIN order.user user where user.id = :userId")
-    List<Order> findOrderByUser(Long userId);
+    @Query("SELECT order FROM Order order INNER JOIN order.user user where user.id = :userId AND (:orderId IS NULL OR order.id = :orderId)")
+    List<Order> findOrderByUser(Long userId, Long orderId);
 
 
 }

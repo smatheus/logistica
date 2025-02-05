@@ -5,6 +5,7 @@ import br.luizalabs.desafio.logistica.entity.Product;
 import br.luizalabs.desafio.logistica.entity.ProductOrder;
 import br.luizalabs.desafio.logistica.entity.User;
 import br.luizalabs.desafio.logistica.utils.FileUtils;
+import org.springframework.data.domain.Range;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
@@ -16,6 +17,13 @@ import java.util.Map;
 public class OrderFileProcessor implements FileProcessor{
 
     private static final FileUtils fileUtils = new FileUtils();
+
+    private final Range<Integer> USER_ID_FIELD_RANGE = Range.closed(0, 10);
+    private final Range<Integer> USER_NAME_FIELD_RANGE = Range.closed(10, 55);
+    private final Range<Integer> ORDER_ID_FIELD_RANGE = Range.closed(55, 65);
+    private final Range<Integer> PRODUCT_ID_FIELD_RANGE = Range.closed(65, 75);
+    private final Range<Integer> PRODUCT_PRICE_FIELD_RANGE = Range.closed(75, 87);
+    private final Range<Integer> ORDER_DATE_FIELD_RANGE = Range.closed(87, 95);
 
     private final Map<Long, User> userMap;
     private final Map<Long, Order> orderMap;
@@ -42,12 +50,12 @@ public class OrderFileProcessor implements FileProcessor{
 
     @Override
     public void processLine(String line) {
-        Long userId = fileUtils.extractLong(line, 0, 10);
-        String userName = fileUtils.extractString(line, 10, 55);
-        Long orderId = fileUtils.extractLong(line, 55, 65);
-        Long productId = fileUtils.extractLong(line, 65, 75);
-        BigDecimal productPrice = fileUtils.extractBigDecimal(line, 75, 87);
-        LocalDate orderDate = fileUtils.extractDate(line, 87, 95);
+        Long userId = fileUtils.extractLong(line, USER_ID_FIELD_RANGE);
+        String userName = fileUtils.extractString(line, USER_NAME_FIELD_RANGE);
+        Long orderId = fileUtils.extractLong(line, ORDER_ID_FIELD_RANGE);
+        Long productId = fileUtils.extractLong(line, PRODUCT_ID_FIELD_RANGE);
+        BigDecimal productPrice = fileUtils.extractBigDecimal(line, PRODUCT_PRICE_FIELD_RANGE);
+        LocalDate orderDate = fileUtils.extractDate(line, ORDER_DATE_FIELD_RANGE);
 
         User user = getUser(userMap, userId, userName, newUsers);
         Order order = getOrder(orderMap, orderId, orderDate, user, newOrders);
