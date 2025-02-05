@@ -21,6 +21,7 @@ import java.time.LocalDate;
 @RequestMapping("/user")
 public class UserController {
 
+
     private final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
 
     @Autowired
