@@ -9,6 +9,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
@@ -78,5 +79,20 @@ public class OrderTest {
         User user = new User(2L, "Usuario teste");
         order1.setUser(user);
         assertEquals(order1.getUser(), user);
+    }
+
+    @Test
+    public void shouldBeDifferentWhenTheObjectsIsNull(){
+        assertNotEquals(null, order1);
+    }
+
+    @Test
+    public void shouldBeEqualWhenTheObjectsIsTheSame(){
+        assertEquals(order1, order1);
+    }
+
+    @Test
+    public void shouldBeDifferentWhenClassAreNotEqual(){
+        assertNotEquals(new User(), order1);
     }
 }
