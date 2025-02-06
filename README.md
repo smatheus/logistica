@@ -49,7 +49,7 @@ Este projeto tem como objetivo oferecer uma solução simplificada para gestão 
 - Foi configurado um **pipeline no GitHub Actions**, que:
     - Executa o build da aplicação.
     - Roda os testes automatizados.
-    - Gera relatórios de cobertura de testes via **Codecov**.
+    - Gera relatórios de cobertura de testes via jacoco e envia para o **Codecov**.
 
 - A documentação da API foi implementada utilizando **Swagger**, acessível em:
     - **[Swagger UI](http://localhost:8080/swagger-ui/index.html)**
