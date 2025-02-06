@@ -42,7 +42,7 @@ Este projeto tem como objetivo oferecer uma solução simplificada para gestão 
 
 - Em cenários de alta demanda, a separação entre **leitura** e **escrita** em servidores distintos poderia ser implementada (**CQRS**), além do uso de **AWS Lambda** para hospedar APIs individualmente.
 
-- Foi adotada uma **arquitetura em camadas**, garantindo manutenção simplificada sem comprometer boas práticas como os princípios **SOLID**.
+- Foi adotada uma **arquitetura em camadas**, mais simplificada, porém sem comprometer boas práticas do projeto como os princípios **SOLID** e alguns design patterns como o **Factory**.
 
 - O **Flyway** foi utilizado para gestão de migrações do banco de dados, garantindo maior controle e rastreabilidade das alterações estruturais.
 
