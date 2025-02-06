@@ -15,10 +15,14 @@
  
  >- Outro mecanismo que poderiam ser utilizado seria o Spring Batch, mas visto que a quantidade de registros não é tão grande, não houve melhorias significativas na sua utilização, dados alguns testes que foram feitos.
  
+ >- Foi Utilizado um banco relacional devido as entidades que são inseridas serem bem definidas e com atributos não variáveis. O banco utilizado foi o <b>Postgresql</b>.
+ 
  >- Em um caso mais robusto onde uma das APIs fossem utilizadas mais vezes e tivesse uma alta taxa de requisições por minuto, valeria a separação da busca e do salvamento em servidores distintos(podendo até utilizar lambdas da aws para hospedar cada uma das APIs) para não sobrecarregar o servidor(Conceito de CQRS).
  
  >- Devido ao escopo reduzido do projeto foi optado por utilizar uma arquitetura baseada em camadas para simplificar, porém ainda foram seguidos diversos padrões para garantir a manutenabilidade e evolução do código como por exemplo o SOLID.
  
  >- Foi utilizado o flyway para executar as migrations de banco de dados e criar as tabelas devido a sua versatilidade de trabalhar com SQL.
 
- >- Foi Criado um pipeline para o github actions para rodar o build, tests e gerar um coverage. O Coverage é gerado no codecov para poder consultar visualmente a cobertura de testes da aplicação.
+ >-  Foi Criado um pipeline para o github actions para rodar o build, tests e gerar um coverage. O Coverage é gerado no codecov para poder consultar visualmente a cobertura de testes da aplicação.
+ 
+ >- Foi Adicionado o Swagger para documentação dos endpoints, sendo possível acessá-lo através do endereço: <b>http://localhost:8080/swagger-ui/index.html </b>

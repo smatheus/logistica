@@ -2,6 +2,9 @@ package br.luizalabs.desafio.logistica.controller;
 
 import br.luizalabs.desafio.logistica.exception.FileIsEmptyException;
 import br.luizalabs.desafio.logistica.service.FileTransformationService;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,8 +30,9 @@ public class OrderController {
     @Autowired
     private FileTransformationService fileTransformationService;
 
-    @PostMapping
-    public ResponseEntity<String> insertOrder(@RequestParam("file") MultipartFile file){
+    @PostMapping(consumes = {"multipart/form-data"})
+    public ResponseEntity<String> insertOrder(@RequestBody(description = "Arquivo a ser enviado", content = @Content(mediaType = "multipart/form-data", schema = @Schema(type = "string", format = "binary")))
+                                              @RequestParam("file") MultipartFile file) {
         try {
             File tempFile = File.createTempFile("upload-" + file.getName(), ".txt");
             file.transferTo(tempFile);
