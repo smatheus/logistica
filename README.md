@@ -1,7 +1,7 @@
 # Logística
 
 ## 📌 Visão Geral
-Este projeto tem como objetivo oferecer uma solução simplificada para gestão de processos logísticos, utilizando tecnologias modernas e boas práticas de desenvolvimento.
+Este projeto tem como objetivo oferecer uma solução simplificada para transformação de um arquivo legado de pedidos para entidades do banco padronizadas e busca de pedidos do usuário utilizando boas práticas de desenvolvimento.
 
 ---
 
